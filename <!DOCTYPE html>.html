@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFix - Solucions Informàtiques</title>
+    <link rel="icon" href="logo TechFix.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            padding-bottom: 100px;
+        }
+        nav {
+            background-color: #1e3d58;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(216, 211, 211, 0.1);
+        }
+        .logo-text {
+            display: flex;
+            align-items: center;
+        }
+        .logo-text img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+        }
+        .logo-text h2 {
+            font-size: 2.3em;
+            color: white;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        nav ul a:hover {
+            color: #fdd835;
+        }
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: white;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .section h2 {
+            font-size: 2.7em;
+            margin-bottom: 20px;
+            color: #1e3d58;
+            font-weight: bold;
+        }
+        .section p {
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555;
+        }
+        .inicio-img {
+            margin-top: 30px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .pricing-table {
+            margin: 30px auto;
+            width: 90%;
+            max-width: 800px;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        .pricing-table th {
+            background-color: #1e3d58;
+            color: white;
+            font-weight: bold;
+        }
+        .pricing-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .pricing-table tr:hover {
+            background-color: #ffeb3b;
+        }
+        .pricing-table td.price {
+            font-weight: bold;
+            color: #000000;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #1e3d58;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #fdd835;
+            transform: translateY(-3px);
+        }
+        footer {
+            background-color: #1e3d58;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+        }
+        footer p {
+            font-size: 0.9em;
+        }
+        .team-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .team-member {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .team-img {
+            border-radius: 50%;
+            border: 3px solid #1e3d58;
+        }
+        .team-member:hover {
+            transform: scale(1.1);
+        }
+        #afegit-missatge {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #1e3d58;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1001;
+        }
+        .review-form {
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        .review-form input, .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .reviews-container {
+            margin-top: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        .review {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative; /* Per posicionar el botó d'eliminar */
+        }
+        .review strong {
+            color: #1e3d58;
+        }
+        .review-delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 0.8em;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+        .review-delete-btn:hover {
+            color: #e53935;
+        }
+        #carrito-total {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 20px;
+            text-align: center; /* Centrar el total */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-text">
+            <img src="logo TechFix.png" alt="logo">
+            <h2>TechFix</h2>
+        </div>
+        <ul>
+            <li><a onclick="showSection('inicio')">Inici</a></li>
+            <li><a onclick="showSection('nosaltres')">Nosaltres</a></li>
+            <li><a onclick="showSection('serveis')">Serveis</a></li>
+            <li><a onclick="showSection('contacte')">Contacte</a></li>
+            <li><a onclick="showSection('carrito')">Carrito <span id="cart-count" style="background:#1e3d58;color:#ffffff;padding:2px 8px;border-radius:50%;font-size:0.8em;">0</span></a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" class="section active">
+        <h2>Benvingut a TechFix</h2>
+        <h3><p><b>Benvingut a TechFix: El teu centre integral de solucions informàtiques a Barcelona.</b></p></h3>
+        
+          <p>Som un equip apassionat per la tecnologia, dedicat a oferir-te un servei excepcional des de 2025, a TechFix trobaràs una àmplia gamma de serveis de reparació, instal·lació, consultoria i una selecció de productes d'alta qualitat. Deixa que la tecnologia treballi per a tu!
+          </p>
+        <a onclick="showSection('serveis')" class="btn">Veure Serveis</a>
+        <br>
+        <img src="ChatGPT Image 28 d’abr. de 2025, 10_26_14.png" alt="Botiga d'informàtica" class="inicio-img" width="800" height="650">
+    </section>
+
+    <section id="nosaltres" class="section">
+        <h2>Qui Som</h2>
+        <p>A TechFix trobaràs reparació, venda i consultoria tecnològica. Des de 2025, ajudem als nostres clients a treure el màxim profit de la seva tecnologia amb un servei personalitzat i de confiança</p>
+        <img src="ChatGPT Image 28 d’abr. de 2025, 10_26_21.png" alt="Interior de la botiga" class="inicio-img" width="700" height="500">
+        <h2>El Nostre Equip</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="20240712_000711.jpg" alt="Membre 1" class="team-img" width="150" height="150">
+                <h4>Gaganjit Singh</h4>
+            </div>
+            <div class="team-member">
+                <img src="foto2.jpeg" alt="Membre 2" class="team-img" width="150" height="150">
+                <h4>Lincoln Osifo</h4>
+            </div>
+            <div class="team-member">
+                <img src="foto4.jpeg" alt="Membre 3" class="team-img" width="150" height="150">
+                <h4>Erik Pérez</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="serveis" class="section">
+        <h2>Els Nostres Serveis</h2>
+        <p>A TechFix oferim una àmplia gamma de serveis i productes informàtics.</p>
+        <h3 style="margin-top: 30px; color: #1e3d58;">Serveis Tècnics</h3>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Servei</th>
+                    <th>Descripció</th>
+                    <th>Preu</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Reparació d'ordinadors</td>
+                    <td>Reparació i manteniment de PCs i portàtils.</td>
+                    <td class="price">40€/hora</td>
+                    <td><button onclick="afegirAlCarrito('Reparació d\'ordinadors', 40)">Afegir</button></td>
+                </tr>
+                <tr>
+                    <td>Instal·lació de programari</td>
+                    <td>Instal·lació de sistemes operatius i aplicacions.</td>
+                    <td class="price">50€</td>
+                    <td><button onclick="afegirAlCarrito('Instal·lació de programari', 50)">Afegir</button></td>
+                </tr>
+                <tr>
+                    <td>Consultoria tecnològica</td>
+                    <td>Assessorament per millorar el rendiment informàtic.</td>
+                    <td class="price">60€/hora</td>
+                    <td><button onclick="afegirAlCarrito('Consultoria tecnològica', 60)">Afegir</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="margin-top: 40px; color: #1e3d58;">Productes en Venda</h3>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Producte</th>
+                    <th>Descripció</th>
+                    <th>Preu</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Portatil Lenovo</td>
+                    <td>Portatil amb intel core i5, 1TB SSD, 16GB RAM</td>
+                    <td class="price">599€</td>
+                    <td><button onclick="afegirAlCarrito('Portatil Lenovo', 599)">Afegir</button></td>
+                </tr>
+                <tr>
+                    <td>Monitor Samsung</td>
+                    <td>Monitor Curvo 24” Essential S3 S36GD FHD 100Hz</td>
+                    <td class="price">119€</td>
+                    <td><button onclick="afegirAlCarrito('Monitor Samsung', 119)">Afegir</button></td>
+                </tr>
+                <tr>
+                    <td>Impressora HP</td>
+                    <td>Impresora HP LaserJet M110w</td>
+                    <td class="price">100€</td>
+                    <td><button onclick="afegirAlCarrito('Impressora HP', 100)">Afegir</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="carrito" class="section">
+        <h2>El Teu Carrito</h2>
+        <div id="carrito-items">
+            <p>El teu carrito està buit.</p>
+        </div>
+        <div id="carrito-total">
+            <strong>Total: 0€</strong>
+        </div>
+        <button onclick="buidarCarrito()" class="btn">Buidar Carrito</button>
+    </section>
+
+    <section id="contacte" class="section">
+        <h2>Contacta'ns</h2>
+        <p>Adreça: Carrer Fictici 123, Ciutat Tech<br>Telèfon: 123-456-789<br>Correu electrònic: contacte@techfix.com</p>
+        <br>
+        <h3>Reseñas o Preguntes</h3>
+        <form class="review-form" id="review-form">
+            <input type="text" id="review-nom" placeholder="El teu nom" required>
+            <textarea id="review-text" placeholder="Escriu la teva pregunta o comentari..." rows="4" required></textarea>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+
+        <div class="reviews-container" id="reviews-container">
+            <h3 style="margin-top: 40px;">Resenyes dels nostres clients</h3>
+        </div>
+    </section>
+
+    <div id="afegit-missatge">S'ha afegit al carretó</div>
+
+    <footer>
+        <p>&copy; 2025 TechFix. Tots els drets reservats.</p>
+    </footer>
+
+    <script>
+        function showSection(section) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+        }
+
+        const carrito = [];
+
+        function afegirAlCarrito(nom, preu) {
+            carrito.push({ nom, preu });
+            actualitzarCarrito();
+            mostrarMissatgeAfegit();
+        }
+
+        function mostrarMissatgeAfegit() {
+            const missatge = document.getElementById('afegit-missatge');
+            missatge.style.display = 'block';
+            setTimeout(() => {
+                missatge.style.display = 'none';
+            }, 2000);
+        }
+
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            actualitzarCarrito();
+        }
+
+        function buidarCarrito() {
+            carrito.length = 0;
+            actualitzarCarrito();
+        }
+
+        function actualitzarCarrito() {
+          const container = document.getElementById('carrito-items');
+            const count = document.getElementById('cart-count');
+            const totalElement = document.getElementById('carrito-total');
+            container.innerHTML = "";
+
+            let total = 0;
+            if (carrito.length === 0) {
+                container.innerHTML = "<p>El teu carretó està buit.</p>";
+            } else {
+                const list = document.createElement('ul');
+                list.style.listStyle = "none";
+                list.style.padding = "0";
+                carrito.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${item.nom}</strong> - ${item.preu}€ <button onclick="eliminarItem(${index})" style="margin-left:10px;">Eliminar</button>`;
+                    li.style.margin = "10px 0";
+                    list.appendChild(li);
+                    total += item.preu;
+                });
+                container.appendChild(list);
+            }
+
+            count.textContent = carrito.length;
+            totalElement.innerHTML = `<strong>Total: ${total}€</strong>`;
+        }
+
+        const resenyes = [];
+        const reviewsContainer = document.getElementById('reviews-container');
+
+        function mostrarResenya(nom, text, index) {
+            const div = document.createElement('div');
+            div.className = "review";
+            div.innerHTML = `<strong>${nom}</strong><br><em>"${text}"</em> <button class="review-delete-btn" onclick="eliminarResenya(${index})">Eliminar</button>`;
+            reviewsContainer.prepend(div);
+        }
+
+        function eliminarResenya(index) {
+            resenyes.splice(index, 1);
+            actualitzarResenyesVisibles();
+        }
+
+        function actualitzarResenyesVisibles() {
+            reviewsContainer.innerHTML = '<h3 style="margin-top: 40px;">Resenyes dels nostres clients</h3>';
+            resenyes.forEach((r, index) => {
+                mostrarResenya(r.nom, r.text, index);
+            });
+        }
+
+        document.getElementById('review-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nom = document.getElementById('review-nom').value;
+            const text = document.getElementById('review-text').value;
+            resenyes.push({ nom, text });
+            actualitzarResenyesVisibles();
+            document.getElementById('review-nom').value = '';
+            document.getElementById('review-text').value = '';
+        });
+
+        window.onload = () => {
+            resenyes.push({ nom: "Elvis Presley Jr.", text: "Un servei excel·lent! El meu ordinador va quedar com nou en menys de 24 hores." });
+            resenyes.push({ nom: "Jennifer Lawrence", text: "El teclat mecànic que vaig comprar és espectacular, gràcies per l’assessorament!" });
+            resenyes.push({ nom: "Antonio Recio", text: "Molt professionals i atents, recomanaria TechFix sense dubtar-ho." });
+            actualitzarResenyesVisibles();
+            actualitzarCarrito();
+        };
+    </script>
+</body>
+</html>
